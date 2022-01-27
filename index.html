@@ -28,12 +28,8 @@
 </head>
 
 <body>
-
   <div class="reveal">
-
-    <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
-
       <section data-auto-animate>
         <h1 data-id="title">Azure Functions</h1>
         <img src="assets/azurefunctions-icon.svg" width="300px">
@@ -55,11 +51,14 @@
         <img src="assets/afraid.jpg">
       </section>
 
+      <section data-background-image="assets/what_is_it.png">
+      </section>
+
       <section>
         <p>
           Azure Functions is a hosted server in the runtime of your choosing that you do not have to deal with from a
           hardware and networking perspective. With the way functions work, and the fact they are atomic there is less
-          code needed since you don’t need to wire up any routing or startup type code. Because the hardware can be
+          code needed since you don't need to wire up any routing or startup type code. Because the hardware can be
           shared, there is a cost reduction that comes with that.
         </p>
       </section>
@@ -268,7 +267,6 @@
       </section>
 
     </div>
-
   </div>
 
   <script src="dist/reveal.js"></script>
@@ -290,7 +288,6 @@
       Reveal.registerPlugin(RevealHighlight)
     })
   </script>
-
 </body>
 
 </html>
