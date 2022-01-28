@@ -51,7 +51,8 @@
         <img src="assets/afraid.jpg">
       </section>
 
-      <section data-background-image="assets/what_is_it.png">
+      <section data-auto-animate>
+        <img src="assets/what_is_it.png">
       </section>
 
       <section>
@@ -93,14 +94,20 @@
         <p data-id="version">Version 2 and up</p>
       </section>
 
+      <section data-auto-animate>
+        <p>Today we will be going over examples in C# and JavaScript</p>
+        <p>JavaScript requires a folder and 2 files per function, where C# the trigger definition is done via
+          attributes.</p>
+      </section>
+
       <section>
         <h1>Triggers</h1>
         <p>An event that causes the code to run.</p>
         <ol>
           <li class="fragment">Timer</li>
           <li class="fragment">HTTP</li>
-          <li class="fragment">Blob</li>
-          <li class="fragment">Queue</li>
+          <li class="fragment">Blob Storage</li>
+          <li class="fragment">Queue Storage</li>
           <li class="fragment">Cosmos DB*</li>
           <li class="fragment">Event Hub*</li>
         </ol>
@@ -120,16 +127,35 @@
       </section>
 
       <section>
-        <h3>Function Parts</h3>
+        <h3>C#</h3>
         <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1|3|5-7"><script type="text/template">
-          [FunctionName("TimeExample")]
+          [FunctionName("TimerExample")]
           public void Run(
             [TimerTrigger("0 */5 * * * *")] TimerInfo myTimer
             )
-          {
-            Console.WriteLine($"Hello World!");
-          }
-        </script></code></pre>
+            {
+              Console.WriteLine($"Hello World!");
+            }
+          </script></code></pre>
+      </section>
+
+      <section>
+        <h3>JavaScript</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="1-7|3|5|9-13|10|11-12|12"><script type="text/template">
+            /* TimerExample/function.json */
+            {
+              "schedule": "0 */5 * * * *",
+              "name": "myTimer",
+              "type": "timerTrigger",
+              "direction": "in"
+            }
+
+            /* TimerExample/index.js */
+            module.exports = function (context, myTimer) {
+              context.log('Hello World!');   
+              context.done();
+            };
+          </script></code></pre>
       </section>
 
       <section>
@@ -163,7 +189,7 @@
       </section>
 
       <section>
-        <h3>Function Parts</h3>
+        <h3>C#</h3>
         <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1|3|5-17|6-10|16"><script type="text/template">
           [FunctionName("HttpExample")]
           public static async Task<IActionResult> Run(
@@ -186,6 +212,45 @@
       </section>
 
       <section>
+        <h3>JavaScript</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="1-17|5-10|6|7|9|19-33|20|21-31|32"><script type="text/template">
+            /* HttpExample/function.json */
+            {
+              "disabled": false,    
+              "bindings": [
+                  {
+                      "authLevel": "function",
+                      "type": "httpTrigger",
+                      "direction": "in",
+                      "name": "req"
+                  },
+                  {
+                      "type": "http",
+                      "direction": "out",
+                      "name": "res"
+                  }
+              ]
+            }
+
+            /* HttpExample/index.js */
+            module.exports = function(context, req) {
+              if (req.query.name || (req.body && req.body.name)) {
+                  context.res = {
+                      body: "Hello " + (req.query.name || req.body.name)
+                  };
+              }
+              else {
+                  context.res = {
+                      status: 400,
+                      body: "Please pass a name on the query string or in the request body"
+                  };
+              }
+              context.done();
+            };
+          </script></code></pre>
+      </section>
+
+      <section>
         <h3>When to Use</h3>
         <ul>
           <li>There is a need for an API</li>
@@ -195,17 +260,18 @@
       </section>
 
       <section>
-        <h1 class="r-fit-text">BLOB</h1>
+        <h1 class="r-fit-text">BLOB STORAGE</h1>
       </section>
 
       <section>
         <h1>What is it?</h1>
         <p>A function that happens a new blob is added to a container</p>
+        <p>A blob can be both a trigger and a trigger output</p>
         <small>Think of a container as a folder in azure, limited to 50MB</small>
       </section>
 
       <section data-auto-animate>
-        <h3>Function Parts</h3>
+        <h3>C#</h3>
         <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1|3|4|6-8"><script type="text/template">
           [FunctionName("BlobExample")]
           public void Run(
@@ -218,12 +284,39 @@
         </script></code></pre>
       </section>
 
+      <section>
+        <h3>JavaScript</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="1-13|9|15-19|17|18"><script type="text/template">
+          /* BlobExample/function.json */
+          {
+            "disabled": false,
+            "bindings": [
+                {
+                    "name": "myBlob",
+                    "type": "blobTrigger",
+                    "direction": "in",
+                    "path": "your-folder/{name}",
+                    "connection":"MyStorageAccountAppSetting"
+                }
+            ]
+          }
+
+          /* BlobExample/index.js */
+          module.exports = function(context) {
+            context.log('Node.js Blob trigger function processed', context.bindings.myBlob);
+            context.done();
+          };
+        </script></code></pre>
+      </section>
+
       <section data-auto-animate>
         <h3>You can even limit the file</h3>
         <pre><code class="hljs" data-trim><script type="text/template">
               [BlobTrigger("your-folder/{name}.csv", Connection = "")] Stream myBlob
-
               [BlobTrigger("your-folder/something-specific.csv", Connection = "")] Stream myBlob
+
+              "path": "your-folder/{name}.csv",
+              "path": "your-folder/something-specific.csv",
         </script></code></pre>
       </section>
 
@@ -236,17 +329,18 @@
       </section>
 
       <section>
-        <h1 class="r-fit-text">QUEUE</h1>
+        <h1 class="r-fit-text">QUEUE STORAGE</h1>
       </section>
 
       <section>
         <h1>What is it?</h1>
-        <p>A function that happens am item is added to a queue</p>
+        <p>A function that happens when an item is added to a queue</p>
+        <p>A queue can be both a trigger and a trigger output</p>
         <small>Think of a queue as a list of items all the same but not associated</small>
       </section>
 
       <section data-auto-animate>
-        <h3>Function Parts</h3>
+        <h3>C#</h3>
         <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1|3|5-7"><script type="text/template">
           [FunctionName("QueueExample")]
           public void Run(
@@ -259,6 +353,33 @@
       </section>
 
       <section>
+        <h3>JavaScript</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="1-13|6|8|9|15-21|16|17-19|20"><script type="text/template">
+          /* QueueExample/function.json */
+          {
+            "disabled": false,
+            "bindings": [
+                {
+                    "type": "queueTrigger",
+                    "direction": "in",
+                    "name": "myQueueItem",
+                    "queueName": "myqueue-items",
+                    "connection":"MyStorageConnectionAppSetting"
+                }
+            ]
+          }
+
+          /* QueueExample/index.js */
+          module.exports = async function (context, message) {
+            context.log('Node.js queue trigger function processed work item', message);
+            // OR access using context.bindings.<name>
+            context.log('Node.js queue trigger function processed work item', context.bindings.myQueueItem);
+            context.done();
+          };
+        </script></code></pre>
+      </section>
+
+      <section>
         <h3>When to Use</h3>
         <ul>
           <li>There are several items to process</li>
@@ -266,6 +387,34 @@
         </ul>
       </section>
 
+      <section>
+        <h1 class="r-fit-text">EXAMPLES</h1>
+      </section>
+
+      <section>
+        <img src="assets/whatnow.gif" />
+      </section>
+
+      <section>
+        <h1>Further Reading</h1>
+        <ul>
+          <li><a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=csharp">MS
+              Timer Trigger Docs</a></li>
+          <li><a
+              href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=csharp">MS
+              HTTP Trigger Docs</a></li>
+          <li><a
+              href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=csharp">MS
+              Blob Storage Trigger Docs</a></li>
+          <li><a
+              href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=csharp">MS
+              Queue Storage Trigger Docs</a></li>
+          <li><a href="https://crontab.guru/">Crontab Guru</a></li>
+        </ul>
+      </section>
+
+      <section data-background-image="assets/thanks.gif">
+      </section>
     </div>
   </div>
 
