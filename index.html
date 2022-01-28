@@ -6,7 +6,7 @@
 
   <title>Azure Functions</title>
 
-  <meta name="description" content="A intro to the basic azure functions">
+  <meta name="description" content="A intro to the basic azure Functions">
   <meta name="author" content="Randy Keyes">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -60,7 +60,8 @@
           Azure Functions is a hosted server in the runtime of your choosing that you do not have to deal with from a
           hardware and networking perspective. With the way functions work, and the fact they are atomic there is less
           code needed since you don't need to wire up any routing or startup type code. Because the hardware can be
-          shared, there is a cost reduction that comes with that.
+          shared, there is a cost reduction that comes with that. If you choose a consumtion plan you don't have to pay
+          for the function when it is at rest.
         </p>
       </section>
 
@@ -121,7 +122,7 @@
       <section>
         <h1>What is it?</h1>
         <p>A function that happens periodically, based on a CRON statement</p>
-        <small>Keep in mind azure goes down to the second and is 24 hour based, other CRON systems are
+        <small>Keep in mind Azure goes down to the second and is 24 hour based, other CRON systems are
           limited to the
           minute</small>
       </section>
@@ -173,8 +174,8 @@
       <section>
         <h3>When to Use</h3>
         <ul>
-          <li>Any time something needs to happen daily, weekly, monthly, ect</li>
-          <li>When the load of the work is to demanding for real time event processing</li>
+          <li>Any time something needs to happen daily, weekly, monthly, etc</li>
+          <li>When the load of the work is too demanding for real time event processing</li>
         </ul>
       </section>
 
@@ -265,9 +266,9 @@
 
       <section>
         <h1>What is it?</h1>
-        <p>A function that happens a new blob is added to a container</p>
+        <p>A function that happens when a new blob is added to a container</p>
         <p>A blob can be both a trigger and a trigger output</p>
-        <small>Think of a container as a folder in azure, limited to 50MB</small>
+        <small>Think of a container as a folder in Azure, limited to 50MB</small>
       </section>
 
       <section data-auto-animate>
