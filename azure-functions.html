@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Azure Functions</title>
+
+  <meta name="description" content="A intro to the basic azure Functions">
+  <meta name="author" content="Randy Keyes">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <style>
+    .reveal .hljs.has-highlights tr:not(.highlight-line) {
+      opacity: .1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-auto-animate>
+        <h1 data-id="title">Azure Functions</h1>
+        <img src="assets/azurefunctions-icon.svg" width="300px">
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">What are they?</h1>
+        <img src="assets/azurefunctions-icon.svg" width="300px">
+      </section>
+
+      <section data-auto-animate>
+        <blockquote cite="https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview" data-id="quote">
+          &ldquo;Azure Functions is a serverless solution that allows you to write less code, maintain less
+          infrastructure, and save on costs.&rdquo;
+        </blockquote>
+      </section>
+
+      <section data-auto-animate>
+        <img src="assets/afraid.jpg">
+      </section>
+
+      <section data-auto-animate>
+        <img src="assets/what_is_it.png">
+      </section>
+
+      <section>
+        <p>
+          Azure Functions is a hosted server in the runtime of your choosing that you do not have to deal with from a
+          hardware and networking perspective. With the way functions work, and the fact they are atomic there is less
+          code needed since you don't need to wire up any routing or startup type code. Because the hardware can be
+          shared, there is a cost reduction that comes with that. If you choose a consumption plan you don't have to pay
+          for the function when it is at rest.
+        </p>
+      </section>
+
+      <section>
+        <h1>Pretty simple, at the highest level concept</h1>
+      </section>
+
+      <section>
+        <h1>Let's get into the details</h1>
+      </section>
+
+      <section data-auto-animate>
+        <h2>Language Support</h2>
+        <img src="assets/c-sharp.svg" data-id="img1" style="width: 300px;">
+        <img src="assets/js.png" data-id="img2" style="width: 300px;">
+        <img src="assets/fsharp.png" data-id="img3" style="width: 300px;">
+        <img src="assets/java.webp" data-id="img4" style="width: 0px;">
+        <img src="assets/powershell.png" data-id="img5" style="width: 0px;">
+        <img src="assets/typescript.png" data-id="img6" style="width: 0px;">
+        <p data-id="version">Version 2 and up</p>
+      </section>
+
+      <section data-auto-animate>
+        <h2>Language Support</h2>
+        <img src="assets/c-sharp.svg" data-id="img1" style="width: 200px;">
+        <img src="assets/js.png" data-id="img2" style="width: 200px;">
+        <img src="assets/fsharp.png" data-id="img3" style="width: 200px;">
+        <img src="assets/java.webp" data-id="img4" style="width: 200px;">
+        <img src="assets/powershell.png" data-id="img5" style="width: 200px;">
+        <img src="assets/typescript.png" data-id="img6" style="width: 200px;">
+        <p data-id="version">Version 2 and up</p>
+      </section>
+
+      <section data-auto-animate>
+        <p>Today we will be going over examples in C# and JavaScript</p>
+        <p>JavaScript requires a folder and 2 files per function, where C# the trigger definition is done via
+          attributes.</p>
+      </section>
+
+      <section>
+        <h1>Triggers</h1>
+        <p>An event that causes the code to run.</p>
+        <ol>
+          <li class="fragment">Timer</li>
+          <li class="fragment">HTTP</li>
+          <li class="fragment">Blob Storage</li>
+          <li class="fragment">Queue Storage</li>
+          <li class="fragment">Cosmos DB*</li>
+          <li class="fragment">Event Hub*</li>
+        </ol>
+        <small class="fragment">* Not covered in this presentation</small>
+      </section>
+
+      <section>
+        <h1 class="r-fit-text">TIMER</h1>
+      </section>
+
+      <section>
+        <h1>What is it?</h1>
+        <p>A function that happens periodically, based on a CRON statement</p>
+        <small>Keep in mind Azure goes down to the second and is 24 hour based, other CRON systems are
+          limited to the
+          minute</small>
+      </section>
+
+      <section>
+        <h3>C#</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1|3|5-7"><script type="text/template">
+          [FunctionName("TimerExample")]
+          public void Run(
+            [TimerTrigger("0 */5 * * * *")] TimerInfo myTimer
+            )
+            {
+              Console.WriteLine($"Hello World!");
+            }
+          </script></code></pre>
+      </section>
+
+      <section>
+        <h3>JavaScript</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="1-7|3|5|9-13|10|11-12|12"><script type="text/template">
+            /* TimerExample/function.json */
+            {
+              "schedule": "0 */5 * * * *",
+              "name": "myTimer",
+              "type": "timerTrigger",
+              "direction": "in"
+            }
+
+            /* TimerExample/index.js */
+            module.exports = function (context, myTimer) {
+              context.log('Hello World!');   
+              context.done();
+            };
+          </script></code></pre>
+      </section>
+
+      <section>
+        <h1>CRON Statements</h1>
+        <ol>
+          <li class="fragment">*/30 * * * * * - every 30 seconds</li>
+          <li class="fragment">0 */5 * * * * - every 5 minutes</li>
+          <li class="fragment">0 5 4 * * * - at 04:05 every day</li>
+          <li class="fragment">0 5 0 * 8 * - at 00:05 in August</li>
+          <li class="fragment">0 15 14 1 * * - at 14:15 on day 1 of every month</li>
+          <li class="fragment">0 0 22 * * 1-5 - at 22:00 on Monday through Friday of every month</li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>When to Use</h3>
+        <ul>
+          <li>Any time something needs to happen daily, weekly, monthly, etc</li>
+          <li>When the load of the work is too demanding for real time event processing</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="r-fit-text">HTTP</h1>
+      </section>
+
+      <section>
+        <h1>What is it?</h1>
+        <p>A function that happens when it is invoked by a HTTP call</p>
+        <small>All HTTP methods are allowed</small>
+      </section>
+
+      <section>
+        <h3>C#</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1|3|5-17|6-10|16"><script type="text/template">
+          [FunctionName("HttpExample")]
+          public static async Task<IActionResult> Run(
+              [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req
+              )
+          {
+              string name = req.Query["name"];
+  
+              string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+              dynamic data = JsonConvert.DeserializeObject(requestBody);
+              name = name ?? data?.name;
+  
+              string responseMessage = string.IsNullOrEmpty(name)
+                  ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                  : $"Hello, {name}. This HTTP triggered function executed successfully.";
+  
+              return new OkObjectResult(responseMessage);
+          }
+        </script></code></pre>
+      </section>
+
+      <section>
+        <h3>JavaScript</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="1-17|5-10|6|7|9|19-33|20|21-31|32"><script type="text/template">
+            /* HttpExample/function.json */
+            {
+              "disabled": false,    
+              "bindings": [
+                  {
+                      "authLevel": "function",
+                      "type": "httpTrigger",
+                      "direction": "in",
+                      "name": "req"
+                  },
+                  {
+                      "type": "http",
+                      "direction": "out",
+                      "name": "res"
+                  }
+              ]
+            }
+
+            /* HttpExample/index.js */
+            module.exports = function(context, req) {
+              if (req.query.name || (req.body && req.body.name)) {
+                  context.res = {
+                      body: "Hello " + (req.query.name || req.body.name)
+                  };
+              }
+              else {
+                  context.res = {
+                      status: 400,
+                      body: "Please pass a name on the query string or in the request body"
+                  };
+              }
+              context.done();
+            };
+          </script></code></pre>
+      </section>
+
+      <section>
+        <h3>When to Use</h3>
+        <ul>
+          <li>There is a need for an API</li>
+          <li>When you are needing to connect modern tools to legacy workloads</li>
+          <li>Provide internal data to external entities</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="r-fit-text">BLOB STORAGE</h1>
+      </section>
+
+      <section>
+        <h1>What is it?</h1>
+        <p>A function that happens when a new blob is added to a container</p>
+        <p>A blob can be both a trigger and a trigger output</p>
+        <small>Think of a container as a folder in Azure, limited to 50MB</small>
+      </section>
+
+      <section data-auto-animate>
+        <h3>C#</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1|3|4|6-8"><script type="text/template">
+          [FunctionName("BlobExample")]
+          public void Run(
+              [BlobTrigger("your-folder/{name}", Connection = "")] Stream myBlob,
+              string name
+              )
+          {
+              Console.WriteLine($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
+          }
+        </script></code></pre>
+      </section>
+
+      <section>
+        <h3>JavaScript</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="1-13|9|15-19|17|18"><script type="text/template">
+          /* BlobExample/function.json */
+          {
+            "disabled": false,
+            "bindings": [
+                {
+                    "name": "myBlob",
+                    "type": "blobTrigger",
+                    "direction": "in",
+                    "path": "your-folder/{name}",
+                    "connection":"MyStorageAccountAppSetting"
+                }
+            ]
+          }
+
+          /* BlobExample/index.js */
+          module.exports = function(context) {
+            context.log('Node.js Blob trigger function processed', context.bindings.myBlob);
+            context.done();
+          };
+        </script></code></pre>
+      </section>
+
+      <section data-auto-animate>
+        <h3>You can even limit the file</h3>
+        <pre><code class="hljs" data-trim><script type="text/template">
+              [BlobTrigger("your-folder/{name}.csv", Connection = "")] Stream myBlob
+              [BlobTrigger("your-folder/something-specific.csv", Connection = "")] Stream myBlob
+
+              "path": "your-folder/{name}.csv",
+              "path": "your-folder/something-specific.csv",
+        </script></code></pre>
+      </section>
+
+      <section>
+        <h3>When to Use</h3>
+        <ul>
+          <li>There is a file involved</li>
+          <li>I'm sure there are more</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="r-fit-text">QUEUE STORAGE</h1>
+      </section>
+
+      <section>
+        <h1>What is it?</h1>
+        <p>A function that happens when an item is added to a queue</p>
+        <p>A queue can be both a trigger and a trigger output</p>
+        <small>Think of a queue as a list of items all the same but not associated</small>
+      </section>
+
+      <section data-auto-animate>
+        <h3>C#</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|1|3|5-7"><script type="text/template">
+          [FunctionName("QueueExample")]
+          public void Run(
+              [QueueTrigger("my-queue-items", Connection = "")]string myQueueItem
+              )
+          {
+              Console.WriteLine($"C# Queue trigger function processed: {myQueueItem}");
+          }
+        </script></code></pre>
+      </section>
+
+      <section>
+        <h3>JavaScript</h3>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="1-13|6|8|9|15-21|16|17-19|20"><script type="text/template">
+          /* QueueExample/function.json */
+          {
+            "disabled": false,
+            "bindings": [
+                {
+                    "type": "queueTrigger",
+                    "direction": "in",
+                    "name": "myQueueItem",
+                    "queueName": "myqueue-items",
+                    "connection":"MyStorageConnectionAppSetting"
+                }
+            ]
+          }
+
+          /* QueueExample/index.js */
+          module.exports = async function (context, message) {
+            context.log('Node.js queue trigger function processed work item', message);
+            // OR access using context.bindings.<name>
+            context.log('Node.js queue trigger function processed work item', context.bindings.myQueueItem);
+            context.done();
+          };
+        </script></code></pre>
+      </section>
+
+      <section>
+        <h3>When to Use</h3>
+        <ul>
+          <li>There are several items to process</li>
+          <li>The processing of each item requires the same code and can be run independently</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="r-fit-text">EXAMPLES</h1>
+      </section>
+
+      <section>
+        <img src="assets/whatnow.gif" />
+      </section>
+
+      <section>
+        <h1>Further Reading</h1>
+        <ul>
+          <li><a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=csharp">MS
+              Timer Trigger Docs</a></li>
+          <li><a
+              href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=csharp">MS
+              HTTP Trigger Docs</a></li>
+          <li><a
+              href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=csharp">MS
+              Blob Storage Trigger Docs</a></li>
+          <li><a
+              href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=csharp">MS
+              Queue Storage Trigger Docs</a></li>
+          <li><a
+              href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio">Quickstart:
+              Create your first C# function in Azure using Visual Studio</a></li>
+          <li><a
+              href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=nodejs">Develop
+              Azure Functions by using Visual Studio Code</a> - Covers all languages</li>
+          <li><a href="https://app.pluralsight.com/library/courses/azure-functions-fundamentals/table-of-contents">Azure
+              Functions Fundamentals</a></li>
+          <li><a
+              href="https://app.pluralsight.com/library/courses/microsoft-azure-developer-implement-azure-functions/table-of-contents">Microsoft
+              Azure Developer: Implement Azure Functions</a></li>
+          <li><a
+              href="https://app.pluralsight.com/library/courses/microsoft-azure-serverless-functions-create/table-of-contents">Microsoft
+              Azure Developer: Create Serverless Functions</a></li>
+          <li><a href="https://crontab.guru/">Crontab Guru</a></li>
+        </ul>
+      </section>
+
+      <section data-background-image="assets/thanks.gif">
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script>
+    Reveal.initialize();
+
+    const loadScript = src => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.onload = resolve;
+        script.onerror = reject;
+        script.src = src;
+        document.head.append(script);
+      })
+    }
+
+    loadScript('plugin/highlight/highlight.js').then(() => {
+      Reveal.registerPlugin(RevealHighlight)
+    })
+  </script>
+</body>
+
+</html>

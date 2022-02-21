@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Azure B2C</title>
+
+  <meta name="description" content="An intro to Azure B2C">
+  <meta name="author" content="Randy Keyes">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/moon.css" id="theme">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <style>
+    .reveal .hljs.has-highlights tr:not(.highlight-line) {
+      opacity: .1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-auto-animate>
+        <h1 data-id="title">Azure B2C</h1>
+        <img src="/assets//b2c.png" alt="azure b2c logo">
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">AKA</h1>
+        <p class="fragment">Azure AD B2C</p>
+        <p class="fragment">Azure AD Business to Consumer</p>
+      </section>
+
+      <section data-auto-animate>
+        <p data-id="title">The way I like to think of it is AD is for inside the orginization/agency, B2C is for people
+          outside of the orginization/agency.</p>
+      </section>
+
+      <section data-auto-animate="">
+        <p data-id="title">
+          B2C offers a way to create a secure login experience for your users, out of the box with minimal effort. You
+          have the ability to create your own custom login experience, or use the default one.
+        </p>
+      </section>
+
+      <section data-auto-animate="">
+        <p data-id="title">
+          B2C does the work of verifying a person is who they say they are. It takes care of the authentication part of
+          our application.
+        </p>
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          Setup options:
+        </h2>
+        <ul>
+          <li>User Flows</li>
+          <li>Custom Policies</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          User Flows
+        </h2>
+        <p>Predefined, built-in, configurable policies that Azure provides so you can create sign-up, sign-in, and
+          policy
+          editing experiences in minutes.</p>
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          Custom Policies
+        </h2>
+        <p>Enable you to create your own user journeys for complex identity experience scenarios.</p>
+      </section>
+
+      <section data-auto-animate="">
+        <img src="assets/user-flow-vs-custom-policy.png" alt="user flow and custom policy comparison">
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          User Flow Setup
+        </h2>
+        <img src="assets/showtime.webp" alt="user flow and custom policy comparison">
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          What should hopefully already be setup for you.
+        </h2>
+        <ul>
+          <li>A Recource Group containing the B2C Resource</li>
+          <li>A B2C Tenant</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          What are we going to do?
+        </h2>
+        <ul>
+          <li>
+            Create a new B2C application
+            <ul>
+              <li>Enable Access Tokens</li>
+            </ul>
+          </li>
+          <li>Create a new User Flow</li>
+          <li>Run User Flow</li>
+          <li>Inspect Token</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          Custom Policy Scenario
+        </h2>
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          Invite via Email
+        </h2>
+        <p>
+          You have an application that requires an invite to be sent to a user via email. The link can only be good for
+          15 minutes, once they click the link they need to register and once registered be sent back to your
+          application.
+        </p>
+      </section>
+
+      <section data-auto-animate="">
+        <img src="/assets/invite-via-email.png">
+      </section>
+
+      <section>
+        <h1>Further Reading</h1>
+        <ul>
+          <li>
+            <a href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/overview">
+              What is Azure Active Directory B2C?
+            </a>
+          </li>
+          <li>
+            <a href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/user-flow-overview">
+              User flows and custom policies overview
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/tutorial-register-applications?tabs=app-reg-ga">
+              Application registration tutorial
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/azure-ad-b2c/samples">
+              Custom Policy Samples
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section data-background-image="assets/thanks.gif">
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({ slideNumber: true, hash: true });
+
+    const loadScript = src => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.onload = resolve;
+        script.onerror = reject;
+        script.src = src;
+        document.head.append(script);
+      })
+    }
+
+    loadScript('plugin/highlight/highlight.js').then(() => {
+      Reveal.registerPlugin(RevealHighlight)
+    })
+  </script>
+</body>
+
+</html>
