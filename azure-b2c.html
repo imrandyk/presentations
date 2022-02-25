@@ -42,14 +42,14 @@
       </section>
 
       <section data-auto-animate>
-        <p data-id="title">The way I like to think of it is AD is for inside the orginization/agency, B2C is for people
-          outside of the orginization/agency.</p>
+        <p data-id="title">The way I like to think of it is AD is for inside the organization/agency, B2C is for people
+          outside of the organization/agency.</p>
       </section>
 
       <section data-auto-animate="">
         <p data-id="title">
           B2C offers a way to create a secure login experience for your users, out of the box with minimal effort. You
-          have the ability to create your own custom login experience, or use the default one.
+          have the ability to create your own custom login experience, or use one of the default ones.
         </p>
       </section>
 
@@ -99,10 +99,10 @@
 
       <section data-auto-animate="">
         <h2 data-id="title">
-          What should hopefully already be setup for you.
+          What should "hopefully" already be setup for you.
         </h2>
         <ul>
-          <li>A Recource Group containing the B2C Resource</li>
+          <li>A Resource Group containing the B2C Resource</li>
           <li>A B2C Tenant</li>
         </ul>
       </section>
@@ -115,13 +115,20 @@
           <li>
             Create a new B2C application
             <ul>
-              <li>Enable Access Tokens</li>
+              <li>Enable Access & Id Tokens</li>
             </ul>
           </li>
           <li>Create a new User Flow</li>
           <li>Run User Flow</li>
           <li>Inspect Token</li>
         </ul>
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          But Randy, what about users who forget their password?
+        </h2>
+        <img src="assets/password-reset.png" class="fragment">
       </section>
 
       <section data-auto-animate="">
@@ -136,13 +143,39 @@
         </h2>
         <p>
           You have an application that requires an invite to be sent to a user via email. The link can only be good for
-          15 minutes, once they click the link they need to register and once registered be sent back to your
+          15 minutes. Once they click the link they need to register. Once registered they will be sent back to your
           application.
         </p>
       </section>
 
       <section data-auto-animate="">
         <img src="assets/invite-via-email.png">
+      </section>
+
+      <section data-auto-animate="" data-background-color="rgb(190 24 93)">
+        <h2 data-id="title">
+          Pop Quiz!
+        </h2>
+        <img src="assets/popquiz.webp" />
+      </section>
+
+      <section data-auto-animate="" data-background-color="rgb(190 24 93)">
+        <h3 data-id="title">
+          Why would you do this instead of just using a sign in/sign up flow, or a sign in and a sign up flows?<br>
+          *Jeff you can't answer this question
+        </h3>
+      </section>
+
+      <section data-auto-animate="">
+        <h2 data-id="title">
+          So what does B2c allow us to do?
+        </h2>
+        <ul>
+          <li class="fragment">Spin up basic user management ⚡⚡ fast.</li>
+          <li class="fragment">Never reset a password again (well hopefully, there is always that one user.)</li>
+          <li class="fragment">Allows users to have a login for all our apps, or single sign on.</li>
+          <li class="fragment">What else?</li>
+        </ul>
       </section>
 
       <section>
@@ -167,6 +200,11 @@
           <li>
             <a href="https://github.com/azure-ad-b2c/samples">
               Custom Policy Samples
+            </a>
+          </li>
+          <li>
+            <a href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/integrate-with-app-code-samples">
+              Azure AD B2C App Code Samples
             </a>
           </li>
         </ul>
