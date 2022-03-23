@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>CSS</title>
+
+  <meta name="description" content="A intro to the basics of CSS">
+  <meta name="author" content="Randy Keyes">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/sky.css" id="theme">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <style>
+    .reveal .hljs.has-highlights tr:not(.highlight-line) {
+      opacity: .1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-auto-animate>
+        <h1 data-id="title">CSS</h1>
+      </section>
+
+      <section data-auto-animate>
+        CSS stands for Cascading Style Sheets and describes how HTML elements are to be displayed on screen, paper, or
+        in other media formats.
+      </section>
+
+      <section data-auto-animate>
+        <pre data-id="code-animation"><code class="hljs">
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: block;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+a {
+  background-color: transparent;
+}
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+textarea {
+  overflow: auto;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+template {
+  display: none;
+}
+
+[hidden] {
+  display: none;
+}
+        </code></pre>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title">What makes up a CSS rule?</h3>
+        <p>A selector and declarations, which are a list of property-value pairs</p>
+        <aside>You can apply the same declarations to multiple selectors.</aside>
+      </section>
+
+      <section data-auto-animate>
+        <pre data-id="code-animation"><code class="hljs" data-line-numbers="1|2-3">h1 {
+  font-size: 25px;
+  color: red;
+}</code></pre>
+      </section>
+
+      <section data-auto-animate>
+        Currently there are 176 CSS properties, this is not counting vendor-prefixed properties or nonshorthand
+        properties. More are being added by vendors everyday.
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title">You can define your CSS in 3 ways</h3>
+        <ul>
+          <li>Inline - No selector is needed</li>
+          <li>Internally</li>
+          <li>Externally</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title">Inline</h3>
+        <p>Inline declarations are done on a HTML element via the style attribute. Since it is done directly on the
+          element no selector is needed.</p>
+      </section>
+
+      <section data-auto-animate>
+        <section data-auto-animate>
+          <pre data-id="code-animation"><code class="hljs" data-line-numbers="|1"><h1 style="font-size: 25px; color: red;">
+  Hello World
+</h1></code></pre>
+        </section>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title">Internally</h3>
+        <p>Internally you can define CSS at the document level by putting your rules in a style tag in the head of the
+          document.</p>
+      </section>
+
+      <section data-auto-animate>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|4-9">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      h1 {
+        font-size: 25px;
+        color: red;
+      } 
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title">Externally</h3>
+        <p>Externally you can define CSS in a different file and include it into the document via a link tag in the head
+          of the document.</p>
+      </section>
+
+      <section data-auto-animate>
+        <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|4">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </section>
+
+      <section data-auto-animate>
+        So far all the examples have only had 1 rule. But you can have as many rules as you want.
+      </section>
+
+      <section data-auto-animate>
+        Let's say our HTML and CSS looked like this:
+        <pre data-id="code-animation"><code class="hljs" data-trim><h1>Hello</h1>
+<h1 class="red">
+  <div id="world">
+    World!
+  </div>
+</h1></code></pre>
+        <pre data-id="code-animation"><code class="hljs" data-trim>h1 {
+  font-size: 25px;
+  color: red;
+}
+div {
+  font-size: 50px;
+}</code></pre>
+        What do you thing the output would look like?
+      </section>
+
+      <section data-auto-animate>
+        <img src="assets/css-result.png">
+      </section>
+
+      <section data-auto-animate>
+        Let's add these 3 rules to our CSS to look like this:
+        <pre data-id="code-animation"><code class="hljs" data-trim><h1>Hello</h1>
+<h1 class="red">
+  <div id="world">
+    World!
+  </div>
+</h1></code></pre>
+        <pre data-id="code-animation"><code class="hljs" data-trim>#world {
+  color: green;
+}
+.red div {
+  color: red;
+  font-size: 10px;
+}
+h1.red div {
+  color: purple;
+}</code></pre>
+        What do you thing the output would look like now?
+      </section>
+
+      <section data-auto-animate>
+        <img src="assets/css-result2.png">
+      </section>
+
+      <section data-auto-animate>
+        <img src="assets/world.webp" width="300px">
+      </section>
+
+      <section data-auto-animate>
+        Lets look at how the browser handles this.
+      </section>
+
+      <section data-auto-animate>
+        <ul>
+          <li>Make all h1s red with a font size of 25 pixels and keep any other properties.</li>
+          <li class="fragment">Make all divs have a font size of 50 pixels and keep any other properties.</li>
+          <li class="fragment">Make all divs that are under any element with a class of 'red', red and make the font
+            size
+            10 pixels and keep any other properties.</li>
+          <li class="fragment">Make all divs that are under any h1 with a class of 'red' purple and keep any other
+            properties.</li>
+          <li class="fragment">Make all element with an id of 'world', green and keep any other properties.</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate>
+        <img src="assets/specificity.jpg" width="300px">
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title">Specificity</h3>
+        <p>The way specificity works is the browser will take a rule and give it a ranking, it applies the rules to an
+          element from lowest rank to highest rank. This ranking can be calculated pretty quickyly once you understand
+          it.</p>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title">Specificity Ranking</h3>
+        <ul>
+          <li>Type Selectors - Get 1 point</li>
+          <li>Class Selectors - Get 10 points</li>
+          <li>Id Selectors - Get 100 points</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title">Let's look at our 3 rules we added to our example earlier.</h3>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title"><code>#world</code></h3>
+        <ul>
+          <li>Type Selectors - Get 1 point</li>
+          <li>Class Selectors - Get 10 points</li>
+          <li>Id Selectors - Get 100 points</li>
+        </ul>
+        <div class="fragment">100</div>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title"><code>.red div</code></h3>
+        <ul>
+          <li>Type Selectors - Get 1 point</li>
+          <li>Class Selectors - Get 10 points</li>
+          <li>Id Selectors - Get 100 points</li>
+        </ul>
+        <div class="fragment">11</div>
+      </section>
+
+      <section data-auto-animate>
+        <h3 data-id="title"><code>h1.red div</code></h3>
+        <ul>
+          <li>Type Selectors - Get 1 point</li>
+          <li>Class Selectors - Get 10 points</li>
+          <li>Id Selectors - Get 100 points</li>
+        </ul>
+        <div class="fragment">12</div>
+      </section>
+
+      <section data-auto-animate>
+        <table>
+          <thead>
+            <tr>
+              <td>Rule</td>
+              <td>Specificity Rank</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.red div</code></td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td><code>h1.red div</code></td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td><code>#world</code></td>
+              <td>100</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-auto-animate>
+        <img src="assets/css-before-after.png">
+        <p>All with only 124 lines of CSS, link to demo can be found later.</p>
+      </section>
+
+      <section data-auto-animate>
+        <p>There is so much more CSS can do that I didn't even touch today.</p>
+        <ul>
+          <li class="fragment">Animations</li>
+          <li class="fragment">Window width breakpoints</li>
+          <li class="fragment">Variables</li>
+          <li class="fragment">Grid layouts</li>
+          <li class="fragment">and so much more</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate>
+        <h1>Further Reading</h1>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN - CSS Docs</a></li>
+          <li><a href="https://css-tricks.com/almanac/">CSS Tricks Almanac</a></li>
+          <li><a href="https://specificity.keegan.st/">Specificity Calculator</a></li>
+          <li><a href="https://wattenberger.com/blog/css-cascade">The CSS Cascade</a></li>
+          <li><a href="/css-demo/">124 lines of CSS Demo</a></li>
+        </ul>
+      </section>
+
+      <section data-background-image="assets/thanks.gif">
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script>
+    Reveal.initialize();
+
+    const loadScript = src => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.onload = resolve;
+        script.onerror = reject;
+        script.src = src;
+        document.head.append(script);
+      })
+    }
+
+    loadScript('plugin/highlight/highlight.js').then(() => {
+      Reveal.registerPlugin(RevealHighlight)
+    })
+  </script>
+</body>
+
+</html>

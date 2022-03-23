@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link id="pagestyle" rel="stylesheet" type="text/css" href="/css-demo/blank.css">
+
+  <title>Demo</title>
+</head>
+
+<body>
+  <header>
+    <h1>Demo</h1>
+  </header>
+
+  <div class="navigation-container">
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main>
+    <section>
+      <table>
+        <tbody>
+          <tr>
+            <th>Person</th>
+            <th>Number</th>
+            <th>Third Column</th>
+          </tr>
+          <tr>
+            <td>Someone Lastname</td>
+            <td>900</td>
+            <td>Nullam quis risus eget urna mollis ornare vel eu leo.</td>
+          </tr>
+          <tr>
+            <td><a href="#">Person Name</a></td>
+            <td>1200</td>
+            <td>Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nulla non metus auctor fringilla.
+            </td>
+          </tr>
+          <tr>
+            <td>Another Person</td>
+            <td>1500</td>
+            <td>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam id dolor id nibh ultricies
+              vehicula ut id elit.</td>
+          </tr>
+          <tr>
+            <td>Last One</td>
+            <td>2800</td>
+            <td>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
+              fermentum.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <form>
+        <p>
+          <label for="example-input-email">Email address</label>
+          <input type="email" id="example-input-email" placeholder="Enter email">
+        </p>
+        <p>
+          <button type="button" name="button">Button</button>
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <!-- framework toggles -->
+  <div style="position: fixed; top: 0; right: 0; padding: 25px 25px; background: #eee;">
+    <small>Change CSS:</small>
+    <select onchange="swapStyleSheet(this.value)">
+      <option value="/css-demo/blank.css">None</option>
+      <option value="/css-demo/better-default.css">Better</option>
+      <option value="/css-demo/full-theme.css">Theme</option>
+      <option value="/css-demo/variables.css">Variables</option>
+      <option value="/css-demo/new-variables.css">New Variables</option>
+    </select>
+    <a href="" target="_blank" id="pagestylelink" style="color: #000; text-decoration: none;">
+      <small>View Source</small>
+    </a>
+  </div>
+
+  <script>
+    function swapStyleSheet(sheet) {
+      document.getElementById('pagestyle').setAttribute('href', sheet);
+      document.getElementById('pagestylelink').setAttribute('href', sheet);
+    }
+  </script>
+</body>
+
+</html>
