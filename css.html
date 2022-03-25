@@ -237,7 +237,7 @@ template {
       </section>
 
       <section data-auto-animate>
-        Currently there are 176 CSS properties, this is not counting vendor-prefixed properties or nonshorthand
+        Currently there are 176 CSS properties, this is not counting vendor-prefixed properties or non-shorthand
         properties. More are being added by vendors everyday.
       </section>
 
@@ -373,7 +373,7 @@ h1.red div {
             10 pixels and keep any other properties.</li>
           <li class="fragment">Make all divs that are under any h1 with a class of 'red' purple and keep any other
             properties.</li>
-          <li class="fragment">Make all element with an id of 'world', green and keep any other properties.</li>
+          <li class="fragment">Make the element with an id of 'world', green and keep any other properties.</li>
         </ul>
       </section>
 
@@ -384,7 +384,7 @@ h1.red div {
       <section data-auto-animate>
         <h3 data-id="title">Specificity</h3>
         <p>The way specificity works is the browser will take a rule and give it a ranking, it applies the rules to an
-          element from lowest rank to highest rank. This ranking can be calculated pretty quickyly once you understand
+          element from lowest rank to highest rank. This ranking can be calculated pretty quickly once you understand
           it.</p>
       </section>
 
@@ -459,6 +459,37 @@ h1.red div {
       <section data-auto-animate>
         <img src="assets/css-before-after.png">
         <p>All with only 124 lines of CSS, link to demo can be found later.</p>
+      </section>
+
+      <section data-auto-animate="">
+        <h3 data-id="title"><code>!important</code></h3>
+        <p>There are 2 schools of thinking when it comes to this tag.</p>
+        <div class="r-hstack justify-center">
+          <img src="assets//thatllfixit.png" width="300px">
+          <div>and</div>
+          <img src="assets/You could.png" width="300px">
+        </div>
+      </section>
+
+      <section data-auto-animate="">
+        <h3 data-id="title"><code>!important</code></h3>
+        <p>Most of the time I'd tell you to be like Jeff, but in this case don't.</p>
+        <br />
+        <p>So what is the <code>!important</code> tag?</p>
+      </section>
+
+      <section data-auto-animate="">
+        <h3 data-id="title"><code>!important</code></h3>
+        <p>The <code>!import</code> tag allows you to force a property to be what you want it to be.
+          This is not a good practice as it makes debugging you style rules extremely difficult. You can typically find
+          a way to increase the specificity of the rule you are wanting to apply.</p>
+        <p>But there is always that <strong>1</strong> exception!</p>
+      </section>
+
+      <section data-auto-animate="">
+        <h3 data-id="title"><code>!important</code></h3>
+        <p>If you are using a plugin or component that uses inline styles, which in itself is a bad practice, the only
+          way to change that may be with the use of <code>!important</code>.</p>
       </section>
 
       <section data-auto-animate>
