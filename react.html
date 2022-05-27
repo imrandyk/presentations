@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>React</title>
+
+  <meta name="description" content="An intro to React">
+  <meta name="author" content="Randy Keyes">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/simple.css" id="theme">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <style>
+    .reveal .hljs.has-highlights tr:not(.highlight-line) {
+      opacity: .1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-auto-animate>
+        <img src="assets/React-icon.svg.png" alt="react logo">
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">What is react?</h1>
+        <p class="fragment">
+          React is a view layer library written in javascript, not a framework like Backbone, Angular etc. It was
+          developed by Facebook. You
+          can't use React to build a fully-functional web app, as it has no server layer.
+        </p>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">React in the wild</h1>
+        <img src="assets/Facebook_f_logo.svg" alt="facebook logo" class="fragment" data-id="img-1"
+          style="width: 300px" />
+        <img src="assets/Microsoft_logo.svg" alt="microsoft logo" class="fragment" data-id="img-5"
+          style="width: 300px" />
+        <img src="assets/Netflix_logo.svg" alt="netflix logo" class="fragment" data-id="img-2" style="width: 300px" />
+        <img src="assets/Airbnb_Logo.svg" alt="airbnb logo" class="fragment" data-id="img-3" style="width: 300px" />
+        <img src="assets/800px-Uber_logo.svg" alt="uber logo" class="fragment" data-id="img-4" style="width: 300px" />
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Why was react created?</h1>
+        <ul>
+          <li>Shift from MVC mentality</li>
+          <li>Need for a more modular component approach</li>
+          <li>The complexity of 2 way data binding</li>
+          <li>Increased speed of reactivity</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Terms you <em>have</em> to know</h1>
+        <ul>
+          <li class="fragment">Components</li>
+          <li class="fragment">Props</li>
+          <li class="fragment">State</li>
+          <li class="fragment">JSX</li>
+          <li class="fragment">Virtual DOM</li>
+        </ul>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Let's dive on in</h1>
+        <img src="assets/dive-in.gif" />
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Components</h1>
+        <p class="fragment">
+          Components are self contained pieces of code that are used to build up a web app. They are the building blocks
+          of your app. I like to think of them as lego pieces.
+        </p>
+        <p class="fragment">
+          React components are basically just pure functions (same input produces same output). There are exceptions, to
+          this statement, but generally this is the case.
+        </p>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Example</h1>
+        <pre data-id="code-animation">
+          <code class="hljs" data-trim data-line-numbers="">
+            const Simple = () => {
+              return <div>Hello World!</div>;
+            };
+            
+            export default Simple;
+        </code>
+      </pre>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Props</h1>
+        <p class="fragment">
+          Props are the properties passed to the component from it's parent.
+        </p>
+        <p class="fragment">
+          This is the data for the component to use to render.
+        </p>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Example</h1>
+        <pre data-id="code-animation">
+          <code class="hljs" data-trim data-line-numbers="">
+          const Props = (props) => { // or ({name})
+            if (props.name) {
+              return <div>Hello {props.name}!</div>;
+            }
+            return <div>Hello World!</div>;
+          };
+
+          export default Props;
+
+          // Used like so
+          &lt;Props /&gt;
+          &lt;Props name="Randy" /&gt;
+          </code>
+        </pre>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">State</h1>
+        <p class="fragment">
+          This is the internal state of the component, when a state object changes it causes the component to re-render.
+        </p>
+        <p class="fragment">A state object is added by using a useState hook(more on this later). A state object can be
+          as simple as a
+          boolean or a deeply complex object.</p>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Example</h1>
+        <pre data-id="code-animation">
+          <code class="hljs" data-trim data-line-numbers=""><script type="text/template">
+            import { useState } from "react";
+
+            const State = () => {
+              const [count, setCount] = useState(0); // more on this later
+            
+              return (
+                <div>
+                  <p>Hello {count} clicks!</p>
+                  <button onClick={() => setCount(count + 1)}>click</button>
+                </div>
+              );
+            };
+            
+            export default State;
+          </script>
+          </code>
+        </pre>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">JSX</h1>
+        <p class="fragment">
+          I frankly don't even know how to really describe this one. JSX is a syntax extension of javascript. It's a bit
+          like writing html inside of javascript, but so much more.
+        </p>
+        <p class="fragment">You can also include other components in it like any other standard html elements.</p>
+        <p class="fragment">You can even embed <em>ANY</em> javascript expression in JSX, this turns it into an
+          extremely strong templating language.</p>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Example</h1>
+        <pre data-id="code-animation">
+          <code class="hljs" data-trim data-line-numbers="11-15|12|13|4-5|"><script type="text/template">
+            import { useState } from "react";
+            import Simple from "./Simple";
+            
+            const formatNumber = (number) 
+              => new Intl.NumberFormat("en-US").format(number);
+            
+            const Jsx = () => {
+              const [count, setCount] = useState(999);
+            
+              return (
+                <div>
+                  <Simple />
+                  <p>Hello {formatNumber(count)} clicks!</p>
+                  <button onClick={() => setCount(count + 1)}>click</button>
+                </div>
+                );
+              };
+              
+              export default Jsx;
+            </script>
+          </code>
+        </pre>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Virtual DOM</h1>
+        <p class="fragment" style="font-size: 75%;">The virtual DOM is used for efficient re-rendering of the DOM</p>
+        <p class="fragment" style="font-size: 75%;">React aims to re-render the virtual tree only when the state
+          changes</p>
+        <p class="fragment" style="font-size: 75%;">Uses 2 virtual trees (new and previous) to find differences and
+          batch update real DOM</p>
+        <p class="fragment" style="font-size: 75%;">Observes data changes (setState, again more on this later) and
+          does dirty-checking to know
+          when to re-render component
+        </p>
+        <p class="fragment" style="font-size: 75%;">Whenever possible, does not update entire component in real DOM -
+          only computes a patch
+          operation that updates part of the DOM</p>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Hooks</h1>
+        <img src="assets/hook.webp" />
+      </section>
+
+      <section data-auto-animate>
+        <img src="assets/hook-graph.png" />
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">useState</h1>
+        <p>The useState hook uses something called destructuring in javascript to give you 2 things</p>
+        <ol>
+          <li class="fragment">A variable that has the state object</li>
+          <li class="fragment">A method to call to update the state object</li>
+        </ol>
+        <p class="fragment">Why does it return an array? Well it's a DX thing to allow for easier naming. When a
+          function returns an object everything has a name, an array allows you to easily names things how you want.</p>
+      </section>
+
+      <section data-auto-animate>
+        <h2 data-id="title">Destructuring 101</h2>
+        <pre data-id="code-animation">
+          <code class="hljs" data-trim data-line-numbers=""><script type="text/template">
+            const me = {
+              name: "Randy",
+              age: 37
+            }
+            const {name, age} = me;
+            console.log(name); // => Randy
+            console.log(age); // => 37
+
+            // You can rename a prop like so
+            const {name: myName, age} = me;
+
+            const me = ["Randy", 37];
+            const [name, age] = me;
+            console.log(name); // => Randy
+            console.log(age); // => 37
+
+            // You can use the ...(rest) operator 
+            // to get the rest of the props or array items
+            // questions let's talk later.
+          </script>
+          </code>
+        </pre>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Example</h1>
+        <pre data-id="code-animation">
+          <code class="hljs" data-trim data-line-numbers=""><script type="text/template">
+            import { useState } from "react";
+
+            const State = () => {
+              const [count, setCount] = useState(0); // more on this later
+            
+              return (
+                <div>
+                  <p>Hello {count} clicks!</p>
+                  <button onClick={() => setCount(count + 1)}>click</button>
+                </div>
+              );
+            };
+            
+            export default State;
+          </script>
+          </code>
+        </pre>
+      </section>
+
+      <section data-auto-animate>
+        <h1 data-id="title">Further Reading</h1>
+        <ul>
+          <li><a href="https://reactjs.org/docs/getting-started.html">React Getting Started</a></li>
+          <li><a href="https://react.school/creating-components">Creating React Components</a></li>
+          <li><a href="https://reactjs.org/docs/hooks-intro.html">Hooks Intro</a></li>
+        </ul>
+      </section>
+
+      <section data-background-image="assets/thanks.gif">
+      </section>
+    </div>
+  </div>
+
+  <script src=" dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({ slideNumber: true, hash: true });
+
+    const loadScript = src => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.onload = resolve;
+        script.onerror = reject;
+        script.src = src;
+        document.head.append(script);
+      })
+    }
+
+    loadScript('plugin/highlight/highlight.js').then(() => {
+      Reveal.registerPlugin(RevealHighlight)
+    })
+  </script>
+</body>
+
+</html>
